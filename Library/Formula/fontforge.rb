@@ -32,7 +32,6 @@ class Fontforge < Formula
 
   def install
     args = ["--prefix=#{prefix}",
-            "--enable-double",
             "--without-freetype-bytecode"]
 
     if build.without? "python"
