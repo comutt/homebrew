@@ -293,8 +293,8 @@ If \fB\-\-force\fR is passed, and there are multiple versions of \fIformula\fR i
 Perform a substring search of formula names for \fItext\fR\. If \fItext\fR is surrounded with slashes, then it is interpreted as a regular expression\. If no search term is given, all available formula are displayed\.
 .
 .TP
-\fBsearch \-\-macports\fR|\fB\-\-fink\fR \fItext\fR
-Search for \fItext\fR on the MacPorts or Fink package search page\.
+\fBsearch \-\-macports\fR|\fB\-\-fink\fR|\fB\-\-debian\fR \fItext\fR
+Search for \fItext\fR in MacPorts, Fink or Debian\'s package list\.
 .
 .TP
 \fBsh [\-\-env=std]\fR
@@ -501,7 +501,7 @@ If set, Homebrew will use this editor when editing a single formula, or several 
 .
 .TP
 HOMEBREW_GITHUB_API_TOKEN
-A personal GitHub API Access token, which you can be create at \fIhttps://github\.com/settings/applications\fR\. If set, GitHub will allow you a greater number of API requests\. See \fIhttp://developer\.github\.com/v3/#rate\-limiting\fR for more information\.
+A personal GitHub API Access token, which you can create at \fIhttps://github\.com/settings/applications\fR\. If set, GitHub will allow you a greater number of API requests\. See \fIhttp://developer\.github\.com/v3/#rate\-limiting\fR for more information\. Homebrew uses the GitHub API for features such as \fBbrew search\fR\.
 .
 .TP
 HOMEBREW_KEEP_INFO
