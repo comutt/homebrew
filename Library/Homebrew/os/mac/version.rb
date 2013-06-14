@@ -13,5 +13,17 @@ module MacOS
           end
       super(Version.new(v))
     end
+
+    def pretty_name
+      case @version
+      when "10.9" then "Mavericks"
+      when "10.8" then "Mountain Lion"
+      when "10.7" then "Lion"
+      when "10.6" then "Snow Leopard"
+      when "10.5" then "Leopard"
+      when "10.4" then "Tiger"
+      else @version
+      end
+    end
   end
 end
