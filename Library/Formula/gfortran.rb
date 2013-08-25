@@ -14,6 +14,7 @@ class Gfortran < Formula
 
   option 'enable-profiled-build', 'Make use of profile guided optimization when bootstrapping GCC'
   option 'check', 'Run the make check fortran. This is for maintainers.'
+  option 'enable-multilib', 'Build with multilib support' if MacOS.prefer_64_bit?
 
   depends_on 'gmp'
   depends_on 'libmpc'
@@ -56,6 +57,13 @@ class Gfortran < Formula
       # ...disable translations avoid conflict with brew install gcc --enable-nls
       '--disable-nls'
     ]
+
+    # https://github.com/mxcl/homebrew/issues/19584#issuecomment-19661219
+    if build.include? 'enable-multilib' and MacOS.prefer_64_bit?
+      args << '--enable-multilib'
+    else
+      args << '--disable-multilib'
+    end
 
     mkdir 'build' do
       unless MacOS::CLT.installed?
@@ -107,16 +115,8 @@ class Gfortran < Formula
   end
 
   def caveats; <<-EOS.undent
-    Brews that require a Fortran compiler should not use:
-      depends_on 'gfortran'
-
-    The preferred method of declaring Fortran support is to use:
-      def install
-        ...
-        ENV.fortran
-        ...
-      end
-
+    Brews that require a Fortran compiler should use:
+      depends_on :fortran
     EOS
   end
 end

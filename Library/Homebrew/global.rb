@@ -65,12 +65,12 @@ end
 
 HOMEBREW_LOGS = Pathname.new('~/Library/Logs/Homebrew/').expand_path
 
-RUBY_BIN = Pathname.new("#{RbConfig::CONFIG['bindir']}")
+RUBY_BIN = Pathname.new(RbConfig::CONFIG['bindir'])
 RUBY_PATH = RUBY_BIN + RbConfig::CONFIG['ruby_install_name'] + RbConfig::CONFIG['EXEEXT']
 
 if RUBY_PLATFORM =~ /darwin/
   MACOS_FULL_VERSION = `/usr/bin/sw_vers -productVersion`.chomp
-  MACOS_VERSION = /(10\.\d+)(\.\d+)?/.match(MACOS_FULL_VERSION).captures.first.to_f
+  MACOS_VERSION = MACOS_FULL_VERSION[/10\.\d+/].to_f
   OS_VERSION = "Mac OS X #{MACOS_FULL_VERSION}"
   MACOS = true
 else
@@ -98,7 +98,7 @@ HOMEBREW_PULL_OR_COMMIT_URL_REGEX = 'https:\/\/github.com\/(\w+)\/homebrew(-\w+)
 
 require 'compat' unless ARGV.include? "--no-compat" or ENV['HOMEBREW_NO_COMPAT']
 
-ORIGINAL_PATHS = ENV['PATH'].split(':').map{ |p| Pathname.new(p).expand_path rescue nil }.compact.freeze
+ORIGINAL_PATHS = ENV['PATH'].split(File::PATH_SEPARATOR).map{ |p| Pathname.new(p).expand_path rescue nil }.compact.freeze
 
 SUDO_BAD_ERRMSG = <<-EOS.undent
   You can use brew with sudo, but only if the brew executable is owned by root.
