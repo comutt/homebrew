@@ -6,7 +6,7 @@ class Gauche < Formula
   sha1 '71d7ca3eceb9adc1de33455c1616cbed89d226f7'
 
   def install
-    system './configure', "--prefix=#{prefix}", '--disable-dependency-tracking',
+    system './configure', "--prefix=#{prefix}",
                           '--enable-multibyte=utf-8'
     system "make"
     system "make check"
